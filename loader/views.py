@@ -2,6 +2,8 @@ from flask import render_template, Blueprint, request
 from functions import new_post_to_json
 import logging
 from config import ALLOWED_EXTENSIONS
+from config import UPLOAD_FOLDER
+
 
 loader_blueprint = Blueprint('loader_blueprint', __name__, template_folder='templates')
 
@@ -15,12 +17,15 @@ def page_loader_post():
         return 'Получены не все данные'
     filename = picture.filename  # Получаем имя файла у загруженного файла
     extension = filename.split(".")[-1]  # расширение файла
+    # new_picture = f'{UPLOAD_FOLDER}/{filename}'
+    new_picture = f'{filename}'
 
     if extension in ALLOWED_EXTENSIONS:
-        picture.save(filename)
-        new_post_to_json(filename, content)
 
-        return render_template('post_uploaded.html', picture=filename, content=content)
+        picture.save(new_picture)
+        new_post_to_json(new_picture, content)
+
+        return render_template('post_uploaded.html', picture=new_picture, content=content)
     else:
         logging.info('Пост не загружен, картинка не соответствует доступным расширениям')
         return 'Пост не загружен, картинка не соответствует доступным расширениям'

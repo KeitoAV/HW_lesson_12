@@ -45,7 +45,7 @@ def new_post_to_json(new_picture, new_content):
         new_post = {"pic": new_picture, "content": new_content}
         all_posts.append(new_post)
         with open(POST_PATH, 'w', encoding='utf8') as file:
-            json.dump(all_posts, file, ensure_ascii=False)
+            json.dump(all_posts, file, ensure_ascii=False, indent=2)
             logging.info('Пост добавлен!')
 
         return all_posts

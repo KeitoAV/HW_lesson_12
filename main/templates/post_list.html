@@ -14,13 +14,16 @@
 
 {% for post in content_list %}
 <div class="post">
-    <img src="{{ post.pic }}" width="100%" alt="Фото отсутствует :(">
-
+    {% if "https:/" in post.pic %}
+         <img src="{{ post.pic }}" width="100%" alt="Фото отсутствует :(">
+    {% else %}
+         <img src="/uploads/{{ post.pic }}" width="100%" alt="Фото отсутствует :(">
+    {% endif %}
 <p>{{ post.content }}</p>
-
 </div>
 <hr>
 {% endfor %}
+
 
 <a href="/post/" class="button">Добавить пост</a>
 
