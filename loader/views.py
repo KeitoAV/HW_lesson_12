@@ -18,7 +18,7 @@ def page_loader_post():
     filename = picture.filename  # Получаем имя файла у загруженного файла
     extension = filename.split(".")[-1]  # расширение файла
     # new_picture = f'{UPLOAD_FOLDER}/{filename}'
-    new_picture = f'{filename}'
+    new_picture = filename
 
     if extension in ALLOWED_EXTENSIONS:
 
